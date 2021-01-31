@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">TestApplication</string>
+
+    <string name="go">Перейти</string>
+    <string name="homepage">https://yandex.ru</string>
+    <string name="notification_title">Уведомление</string>
+    <string name="token_receive_error">"Ошибка при получении токена"</string>
+    <string name="dialog_positive_button">OK</string>
+
+    <string name="notification_channel_id" translatable="false">fcm_channel</string>
+    <string name="notification_channel_title">fcm_title</string>
+
+    <string name="facebook_app_id">1561109387427654</string>
+    <string name="fb_login_protocol_scheme">fb1561109387427654</string>
+
+
+</resources>
