@@ -12,6 +12,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import com.facebook.FacebookSdk;
+import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -41,11 +43,27 @@ public class StartActivity extends AppCompatActivity {
         // Получить токен и сохранить в SharedPreferences
         getToken();
 
+        FacebookSdk.setAutoInitEnabled(true);
+        FacebookSdk.fullyInitialize();
+        AppLinkData.fetchDeferredAppLinkData(this, new AppLinkData.CompletionHandler() {
+            @Override
+            public void onDeferredAppLinkDataFetched(@Nullable AppLinkData appLinkData) {
+                if (appLinkData != null) {
+                    Logi.logIt("PromotionCode: " + appLinkData.getPromotionCode() + "\n");
+                    Logi.logIt("Ref: " + appLinkData.getRef() + "\n");
+                    Logi.logIt("TargetUri: " + appLinkData.getTargetUri() + "\n");
+                    Logi.logIt("currentThread: " + Thread.currentThread().getName() + "\n");
+                } else {
+                    Logi.logIt("appLinkData is null");
+                }
+            }
+        });
+
         //Получить уведомление при свернутом приложении, при клике по уведомлению
         getNotificationFromIntent();
 
         //Проверить есть ли deepLink и открыть нужную активити
-        checkUriFromDeepLink();
+//        checkUriFromDeepLink();
     }
 
     private void checkUriFromDeepLink() {
